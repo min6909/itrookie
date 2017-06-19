@@ -7,9 +7,10 @@
         <script type="text/javascript">
             var wsServer = 'ws://39.108.58.215:2347';
             var websocket = new WebSocket(wsServer);
+            var userid = "<?php echo mt_rand(1000,9999)?>";
             websocket.onopen = function (evt) {
 //                console.log("Connected to WebSocket server.");
-                websocket.send("亲爱的服务器！我连上你啦哦！");
+                websocket.send("欢迎PHP大侠"+userid);
             };
 
 //            websocket.onclose = function (evt) {
