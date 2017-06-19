@@ -1,0 +1,12 @@
+/*头部和尾部公共样式*/
+/* 
+    Created on : 2017-6-9, 21:06:00
+    Author     : min6909
+*/
+.footer p {
+    color: #7f8c8d;
+    margin: 0;
+    padding: 15px 10px;
+    /*text-align: center;*/
+    background: #2d3e50;
+}

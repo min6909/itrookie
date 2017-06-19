@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <script src="/static/assets/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            var wsServer = 'ws://39.108.58.215:2347';
+            var websocket = new WebSocket(wsServer);
+            websocket.onopen = function (evt) {
+//                console.log("Connected to WebSocket server.");
+                websocket.send("亲爱的服务器！我连上你啦哦！");
+            };
+
+//            websocket.onclose = function (evt) {
+//                console.log("Disconnected");
+//            };
+
+            websocket.onmessage = function (evt) {
+                console.log('Retrieved data from server: ' + evt.data);
+                $('.content').append("<br/>"+evt.data);
+            };
+
+//            websocket.onerror = function (evt, e) {
+//                console.log('Error occured: ' + evt.data);
+//            };
+        </script>
+    </head>
+    <body>
+        <div class="content">
+            <p class="begin">以下是聊天内容：：</p>
+        </div>
+        <input  type="text" id="content">
+        <button  onclick="websocket.send(document.getElementById('content').value)">发送</button>
+    </body>
+</html>

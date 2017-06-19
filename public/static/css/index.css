@@ -1,0 +1,23 @@
+/*去处默认*/
+ul{padding: 0px;margin: 0px;}
+
+/*轮播*/
+.am-slides li{
+    max-height: 1200px;
+    max-height: 460px;
+}
+
+.am-slides li img{
+    width: 100%;
+    height:100%;
+}
+
+@media screen and (max-width:450px){
+    .unseen{display: none;}
+}
+
+
+/*友情链接*/
+.link{
+    
+}
