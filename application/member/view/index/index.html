@@ -8,6 +8,8 @@
             var wsServer = 'ws://39.108.58.215:2347';
             var websocket = new WebSocket(wsServer);
             var userid = "<?php echo mt_rand(1000,9999)?>";
+            
+            
             websocket.onopen = function (evt) {
 //                console.log("Connected to WebSocket server.");
                 websocket.send("欢迎PHP大侠"+userid);
@@ -19,7 +21,8 @@
 
             websocket.onmessage = function (evt) {
                 console.log('Retrieved data from server: ' + evt.data);
-                $('.content').append("<br/>"+evt.data);
+                $('.wrap').append("<p>"+evt.data+"</p>");
+                $('.wrap').scrollTop($('.wrap p:last').offset().top);
             };
 
 //            websocket.onerror = function (evt, e) {
@@ -28,10 +31,32 @@
         </script>
     </head>
     <body>
-        <div class="content">
-            <p class="begin">以下是聊天内容：：</p>
+        <div class="content" style="margin-bottom: 10px;">
+            <div class="wrap" style="max-width: 1000px;height:200px;border: 1px solid red;overflow-y: scroll;">
+                <p class="begin">以下是聊天内容:(测试)</p>
+            </div>
         </div>
         <input  type="text" id="content">
-        <button  onclick="websocket.send(document.getElementById('content').value)">发送</button>
+        <button>发送</button>
+        <!--<button  onclick="websocket.send(document.getElementById('content').value)">发送</button>-->
     </body>
+<script type="text/javascript">
+    $(function(){
+        $('button').click(function(){
+            var content = htmlspecialchars($('#content').val());
+            //防止脚本
+            function htmlspecialchars(str){
+                str = str.replace(/&/g, '&amp;');  
+                str = str.replace(/</g, '&lt;');  
+                str = str.replace(/>/g, '&gt;');  
+                str = str.replace(/"/g, '&quot;');  
+                str = str.replace(/'/g, '&#039;');  
+                return str;
+            }
+            websocket.send(content);
+            //清空input内容
+            $('#content').val('');
+        });
+    });
+</script>
 </html>
