@@ -8,12 +8,15 @@
 
     $server->on('message', function (swoole_websocket_server $server, $frame) {
     //    echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
-
+    //屏蔽字
     $data = $frame->data;
-    $pattern = '/[艹|操|淫|荡|奸]/u';
+    $pattern = '/[艹|操|淫|荡|奸|日]/u';
     $data =preg_replace($pattern,'*',$data);
+    
     foreach ($server->connections as $fd) {
     //        echo PHP_EOL . '  i is  ' . $k . '  data  is ' . $data;
+        //count($server->connections)不知道能不能统计在线人数
+        
     $server->push($fd, $data);
     }
 
